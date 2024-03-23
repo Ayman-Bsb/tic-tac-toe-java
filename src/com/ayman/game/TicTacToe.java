@@ -35,4 +35,17 @@ public class TicTacToe {
             grid[row][col] = player.equals(Player.FIRST) ? 'X' : 'O';
         }
     }
+
+    public boolean checkWin(){
+        for(int i = 0; i < 3 ; i++){
+            var checkWinLine = grid[i][0]!='.' && grid[i][0] == grid[i][1] && grid[i][1] == grid[i][2] ;
+            var checkWinCol = grid[0][i]!='.' && grid[0][i] == grid[1][i] && grid[1][i] == grid[2][i] ;
+            if (checkWinLine || checkWinCol){
+                return true;
+            }
+        }
+        var checkWinDiagonal1 = grid[0][0]!='.' && grid[0][0] == grid[1][1] && grid[1][1] == grid[2][2] ;
+        var checkWinDiagonal2 = grid[0][2]!='.' && grid[0][2] == grid[1][1] && grid[1][1] == grid[2][0] ;
+        return checkWinDiagonal1 || checkWinDiagonal2;
+    }
 }
