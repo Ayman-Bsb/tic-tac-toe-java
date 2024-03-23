@@ -9,8 +9,6 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-
-        final var scanner = new Scanner(System.in);
         final var game = new TicTacToe();
         var player = Player.FIRST;
         var players = initPlayers();
