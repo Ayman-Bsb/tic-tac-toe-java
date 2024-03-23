@@ -27,4 +27,12 @@ public class TicTacToe {
         }
         return builder.toString();
     }
+
+    public void processInput(Player player, int playerInput) {
+        final var row = (playerInput - 1) / 3;
+        final var col = (playerInput - 1) % 3;
+        if(grid[row][col] == '.'){
+            grid[row][col] = player.equals(Player.FIRST) ? 'X' : 'O';
+        }
+    }
 }
