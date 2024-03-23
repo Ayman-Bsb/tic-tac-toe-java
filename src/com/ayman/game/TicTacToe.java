@@ -1,5 +1,8 @@
 package com.ayman.game;
 
+import com.ayman.errors.TicTacToeBoxOccupiedException;
+import com.ayman.errors.TicTacToeInvalidInputException;
+
 import static com.ayman.game.StringConstant.LINE_SEPARATOR;
 import static com.ayman.game.StringConstant.SPACE;
 
@@ -28,11 +31,14 @@ public class TicTacToe {
         return builder.toString();
     }
 
-    public void processInput(Player player, int playerInput) {
+    public void processInput(Player player, int playerInput) throws TicTacToeBoxOccupiedException {
         final var row = (playerInput - 1) / 3;
         final var col = (playerInput - 1) % 3;
         if(grid[row][col] == '.'){
             grid[row][col] = player.equals(Player.FIRST) ? 'X' : 'O';
+        }
+        else {
+            throw new TicTacToeBoxOccupiedException("La case est déjà occupée");
         }
     }
 
@@ -47,5 +53,16 @@ public class TicTacToe {
         var checkWinDiagonal1 = grid[0][0]!='.' && grid[0][0] == grid[1][1] && grid[1][1] == grid[2][2] ;
         var checkWinDiagonal2 = grid[0][2]!='.' && grid[0][2] == grid[1][1] && grid[1][1] == grid[2][0] ;
         return checkWinDiagonal1 || checkWinDiagonal2;
+    }
+
+    public boolean checkDraw() {
+        for(char[] row : grid){
+            for(char cell : row){
+                if(cell == '.'){
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }
